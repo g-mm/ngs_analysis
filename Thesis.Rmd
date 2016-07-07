@@ -1,0 +1,894 @@
+---
+title: "Thesis"
+output: 
+  html_document:
+    toc: true
+    number_sections: false
+    toc_float: 
+      collapesd: true
+      smooth_scroll: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    code_folding: hide
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE}
+library(dplyr)
+library(magrittr)
+library(latex2exp)
+library(qqman)
+```
+
+# Resources {.tabset .tabset-fade}
+
+## Syntax
+
+### Introduction to R studio 
+
+[Rstudio reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+[Rstudio Cheatsheet](http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+### Examples
+
+
+Plain text 
+
+End a line with two spaces to start a new paragraph  
+
+*italics and _italics_
+
+**bold** and __bold__
+
+superscript^2^
+
+~~strikethrough~~
+
+[link](www.rstudio.com)
+
+
+
+### Header 3
+
+#### Header 4
+
+##### Header 5
+
+###### Header 6
+
+
+
+
+endash: __
+
+emdash: ___
+
+elipsis: ...
+
+inline equations: $A = \pi*r^{2}$
+
+image
+
+horizontal rule (or slide break):
+
+***
+
+
+> block quote
+
+* uordered list
+* item 2
+    + sub item 1
+    + sub item 2
+  
+1. Ordered List
+2. item 2
+    * sub item 1
+    2. sub item 2
+  
+Table Header  | Header 2
+--------------|-----------
+Cell 1        | Cell 2
+  
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Github test
+
+
+## Test
+
+```{r}
+setwd("~/Desktop")
+test2 <- read.csv("Query1.csv")
+age = test2$Age.when.AAA.was.detected
+sex = test2$Gender.
+hernia = test2$Hx.of.hernia.repair.
+smoking = test2$Do.you.smoke.cigarettes.
+heart_attack = test2$Heart.Attack.or.Coronary..self.
+bp = test2$High.Blood.Pressure..self.
+chol = test2$High.Cholesterol.Level..self.
+family_hx = test2$Family.Hx.of.AAA.
+stripchart(test2$Age.at.Consent,method = "stack")
+title('Age distribution of AAA patients', xlab='Age',ylab = 'Relative number of patients')
+summary(smoking)
+```
+
+```{r}
+plot(test2$Do.you.smoke.cigarettes.,main = 'Smoking habits of AAA patients',xlab = 'Smoking choices',ylab = 'Number of AAA patients')
+```
+
+```{r}
+hernia_wAAA <- table(test2$Hx.of.hernia.repair., test2$Family.Hx.of.AAA.)
+summary(hernia_wAAA)
+mosaicplot(hernia_wAAA, main = "Hernia and AAA",xlab = "Hx of Hernia", ylab = "Family Hx")
+```
+
+```{r}
+highbp_wAAA <- table(test2$Hx.of.high.blood.pressure., test2$Family.Hx.of.AAA.)
+summary(highbp_wAAA)
+mosaicplot(highbp_wAAA, main = "High blood pressure and AAA",xlab = "Hx of High BP", ylab = "Family Hx")
+```
+
+```{r}
+highchol_wAAA <- table(test2$Hx.of.High.Cholesterol., test2$Family.Hx.of.AAA.)
+summary(highchol_wAAA)
+mosaicplot(highchol_wAAA, main = "High Cholesterol and AAA",xlab = "Hx of High Cholesterol", ylab = "Family Hx")
+```
+
+```{r}
+diabetes_wAAA <- table(test2$Hx.of.diabetes., test2$Family.Hx.of.AAA.)
+summary(diabetes_wAAA)
+mosaicplot(highbp_wAAA, main = "Diabetes and AAA",xlab = "Hx of Diabetes", ylab = "Family Hx")
+```
+
+```{r}
+kidneydisease_wAAA <- table(test2$Hx.of.kidney.disease., test2$Family.Hx.of.AAA.)
+summary(kidneydisease_wAAA)
+mosaicplot(kidneydisease_wAAA, main = "Kidney disease and AAA",xlab = "Hx of kidney disease", ylab = "Family Hx")
+```
+
+```{r}
+big_table <- data.frame(age = test2$Age.when.AAA.was.detected,
+sex = test2$Gender.,
+hernia = test2$Hx.of.hernia.repair.,
+smoking = test2$Do.you.smoke.cigarettes.,
+heart_attack = test2$Heart.Attack.or.Coronary..self.,
+bp = test2$High.Blood.Pressure..self.,
+chol = test2$High.Cholesterol.Level..self.,
+family_hx = as.factor(test2$Family.Hx.of.AAA.))
+
+result <- tapply(big_table$sex,big_table$family_hx,summary)
+result
+```
+## From Davy Cavanaugh
+
+[Command Line:](http://cli.learncodethehardway.org/book/)
+
+[Python:](http://www.codecademy.com/en/tracks/python)
+
+
+
+[R easy:](http://tryr.codeschool.com)
+
+[R medium (with extra stats stuff):](http://www.r-tutor.com/r-introduction)
+
+[R medium:](https://www.nceas.ucsb.edu/files/scicomp/Dloads/RProgramming/BestFirstRTutorial.pdf)
+
+[R harder - mostly a reference:](http://www.statmethods.net/)
+
+[Bioconductor ( an R extension really):](http://www.bioconductor.org/)
+
+[plinkseq:](https://atgu.mgh.harvard.edu/plinkseq/start-pseq.shtml)
+
+[plinkseq:](https://atgu.mgh.harvard.edu/plinkseq/tutorial.shtml)
+
+[other tools for working with VCFs](http://vcftools.sourceforge.net/)
+
+[minerva:](https://hpc.mssm.edu/quickstart2)
+
+###You will doubtless get stuck along the way. I have a heuristic that I go through when trying to figure computer things out:
+1) Check the spelling of every word, check for extra spaces, brackets, quotes, and slashes
+2) Do 1) again
+3) Google the thing you are trying to do in the language you are trying to use. i.e. 'R mean', 'Python read contents of file', 'Bash move file', 'Unix list permission’
+
+## From Dado
+
+
+[Dado's Rstudio page](http://marcora.github.io/methods/gwas/)
+
+```{r}
+setwd("/Users/graceminer/Desktop/marcora.github.io-master/methods/gwas")
+head(read.table("genotypes.map", header = FALSE, as.is = TRUE))
+```
+
+Rows are SNPs
+
+- V1 = Chromosome code
+- V2 = Variant ID
+- V3 = Position in cM
+- V4 = Position in bp
+
+#### Genotypes PED file
+
+```{r}
+head(read.table(pipe('cut -d " " -f 1-10 genotypes.ped'), header = FALSE, as.is = TRUE))
+```
+
+Rows are samples
+
+- V1 = Family ID (FID)
+- V2 = Within-family/Individual ID (IID)
+- V3 = Mother ID (0 if not available)
+- V4 = Father ID (0 if not available)
+- V5 = Sex code (1 = male, 2 = female, 0 = unknown)
+- V6 = Phenotype code (1 = affected, 2 = unaffected, -9 if not applicable or not available)
+- V7-8 = Genotype of first SNP
+- V9-10 = Genotype of second SNP
+- ...
+
+#### Phenotypes (and covariates) TXT file
+
+```{r}
+phenotypes = read.table("phenotypes.txt", header = TRUE, as.is = TRUE)
+str(phenotypes)
+```
+
+
+#### Convert genotypes files to binary format (BED, BIM and FAM files)
+
+```{r engine='sh', eval=FALSE}
+plink --file genotypes --make-bed --out genotypes
+```
+
+
+## GWAS data cleaning
+
+- http://www.ncbi.nlm.nih.gov/pubmed/20718045
+- http://www.ncbi.nlm.nih.gov/pubmed/23652425
+- http://www.ncbi.nlm.nih.gov/pubmed/21085122
+- http://www.bioconductor.org/packages/release/bioc/vignettes/GWASTools/inst/doc/DataCleaning.pdf
+- http://www.h3abionet.org/component/attachments/download/285
+
+- SNP exclusion
+    - Exclude SNPs with a high missing rate
+    - Exclude SNPs with a low minor allele frequency
+    - Exclude SNPs that depart from [Hardy-Weinberg equilibrium](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)
+- Sample exclusion
+    - Exclude samples with a high missing rate
+    - Exclude samples with sex discordance (e.g., due to sample swap or contamination):
+    - Exclude duplicate samples and first-degree relatives
+    - Exclude samples with high heterozigosity (e.g., due to sample contamination or population outliers)
+    - Exclude population outliers or samples with ancestry discordance
+
+
+### Exclude SNPs with a high missing rate
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes --geno 0.05 --make-bed --out genotypes.01
+```
+
+
+### Exclude SNPs with a low minor allele frequency
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.01 --maf 0.01 --make-bed --out genotypes.02
+```
+
+
+### Exclude SNPs that depart from Hardy-Weinberg equilibrium
+
+Calculate statistics for HWE fit:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.02 --hardy --out genotypes.03
+```
+
+```{r}
+genotypes.03.hwe = read.table("genotypes.03.hwe", header = TRUE, check.names = FALSE, as.is = TRUE)
+head(genotypes.03.hwe)
+```
+
+For each SNP:
+
+- CHR = Chromosome code
+- SNP = Variant ID
+- TEST = Type of test (ALL|AFF|UNAFF|ALL(QT)|ALL(NP))
+- A1 = Allele 1 (usually minor)
+- A2 = Allele 2 (usually major)
+- GENO = genotypes count (A1 hom/het/A2 hom)
+- O(HET) = Observed heterozygote frequency
+- E(HET) = Expected heterozygote frequency
+- P	= Hardy-Weinberg equilibrium exact test P-value
+
+Generate and inspect the QQ-plot of observed vs expected (i.e., uniform under the null) P-values and decide which P-value threshold to use for SNP exclusion:
+
+```{r}
+qq(genotypes.03.hwe$P, main = "EUR + AFR")
+```
+
+The QQ-plot reveals a major departure from HWE which, in this case, is due to the fact that the sample dataset contains both EUR and AFR ancestry individuals.
+
+Split the dataset into EUR and AFR ancestry subsets, re-calculate HWE stats for each subset separately and re-plot:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.02 --filter phenotypes.txt EUR --mfilter 6 --hardy --out genotypes.03.EUR
+plink2 --bfile genotypes.02 --filter phenotypes.txt AFR --mfilter 6 --hardy --out genotypes.03.AFR
+```
+
+```{r}
+par(mfrow = c(1,2))
+
+genotypes.03.EUR.hwe = read.table("genotypes.03.EUR.hwe", header = TRUE, check.names = FALSE, as.is = TRUE)
+qq(genotypes.03.EUR.hwe$P, main = "EUR")
+
+genotypes.03.AFR.hwe = read.table("genotypes.03.AFR.hwe", header = TRUE, check.names = FALSE, as.is = TRUE)
+qq(genotypes.03.AFR.hwe$P, main = "AFR")
+
+par(mfrow = c(1,1))
+```
+
+The QQ-plots reveal that SNPs with P-values &le; 10e-5 depart from HWE. Use this P-value threshold for SNP exclusion in each subset separately and merge the two subsets:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.02 --filter phenotypes.txt EUR --mfilter 6 --hwe 0.00001 --make-bed --out genotypes.04.EUR
+plink2 --bfile genotypes.02 --filter phenotypes.txt AFR --mfilter 6 --hwe 0.00001 --make-bed --out genotypes.04.AFR
+
+plink2 --bfile genotypes.04.EUR --bmerge genotypes.04.AFR --make-bed --out genotypes.04
+```
+
+
+### Exclude samples with a high missing rate
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.04 --mind 0.05 --make-bed --out genotypes.05
+```
+
+
+### Exclude samples with sex discordance
+
+Calculate statistics to identify sex-discordant samples (e.g., due to sample swap or contamination) for sample exclusion:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.05 --check-sex --out genotypes.06
+```
+
+```{r}
+genotypes.06.sexcheck = read.table("genotypes.06.sexcheck", header = TRUE, check.names = FALSE, as.is = TRUE)
+head(genotypes.06.sexcheck)
+```
+
+For each sample:
+
+- FID	= Family ID
+- IID	= Within-family/Individual ID
+- PEDSEX = Sex code in input file
+- SNPSEX = Imputed sex code (1 = male, 2 = female, 0 = unknown)
+- STATUS = OK if PEDSEX and SNPSEX match and are nonzero, PROBLEM otherwise
+- F = Inbreeding coefficient, considering only X chromosome
+- YCOUNT = Number of nonmissing genotype calls on Y chromosome (optional)
+
+$$F = 1 - O/E$$
+
+O = Observed # of heterozygous SNPs on the X chromosome
+
+E = Expected # of heterozygous SNPs on the X chromosome assuming HWE
+
+Accounting for sampling noise, sample is male if F > 0.8 (theoretically it should be 1 because O = 0) and female if F < 0.2 (theoretically it should be 0 because 0 = 1).
+
+Note that the sample dataset contains only chromosome 22 SNPs and therefore statistics for sex discordance cannot be calculated!
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.05 --make-bed --out genotypes.07
+```
+
+If sex discordant samples are identified, add `--remove samples_to_exclude.txt` to remove them.
+
+
+### Exclude duplicate samples and first-degree relatives
+
+Exclude duplicate samples and close relatives by finding pairs of samples with high (> 0.1) IBS/IBD PI_HAT values.
+
+Calculate IBS/IBD statistics for each pair of samples and output them if PI_HAT > 0.05:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.07 --genome --min 0.05 --out genotypes.08
+```
+
+These calculations are NOT LD-sensitive and therefore is usually a good idea to perform some form of LD-based pruning before invoking them!
+
+```{r}
+genotypes.08.genome = read.table("genotypes.08.genome", header = TRUE, check.names = FALSE, as.is = TRUE)
+head(genotypes.08.genome)
+```
+
+For each pair of samples:
+
+- FID1 = Family ID for first sample
+- IID1 = Within-family/Individual ID for first sample
+- FID2 = Family ID for second sample
+- IID2 = Within-family/Individual ID for second sample
+- RT = Relationship type inferred from .fam/.ped file
+- EZ = IBD sharing expected value, based on just .fam/.ped relationship
+- Z0 = P(IBD=0) = P(pair share 0 alleles IBD)
+- Z1 = P(IBD=1) = P(pair share 1 alleles IBD)
+- Z2 = P(IBD=2) = P(pair share 2 alleles IBD)
+- PI_HAT = Proportion IBD, i.e. P(IBD=2) + 0.5*P(IBD=1)
+- PHE = Pairwise phenotypic code (1, 0, -1 = AA, AU, and UU pairs, respectively)
+- DST = IBS distance, i.e. (IBS2 + 0.5*IBS1) / (IBS0 + IBS1 + IBS2)
+- PPC = IBS binomial test
+- RATIO	= HETHET:IBS0 SNP ratio (expected value 2)
+
+- Parents-offspring &rarr; Z0 = 0; Z1 = 1; Z2 = 0; PI_HAT = 0.5
+- Siblings &rarr; Z0 = 0.25; Z1 = 0.5; Z2 = 0.25; PI_HAT = 0.5
+- Half siblings &rarr; Z0 = 0.5; Z1 = 0.5; Z2 = 0; PI_HAT = 0.25
+- Avuncular &rarr; Z0 = 0.5; Z1 = 0.5; Z2 = 0; PI_HAT = 0.25
+- First cousins &rarr; Z0 = 0.75; Z1 = 0.25; Z2 = 0; PI_HAT = 0.125
+
+Generate and inspect the Z1 vs Z0 plot to visually identify duplicate samples and first-degree relatives for sample exclusion:
+
+```{r}
+z0 = genotypes.08.genome$Z0
+z1 = genotypes.08.genome$Z1
+plot(z0, z1, xlab = "Z0", ylab = "Z1")
+```
+
+The plot reveals first-degree relatives that need to be removed (one individual from each pair) because some downstream calculations (like PCA) are sensitive to them!
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.07 --remove samples_to_exclude.txt --make-bed --out genotypes.09
+```
+
+
+### Exclude samples with high heterozigosity
+
+Split the dataset into EUR and AFR ancestry subsets and, for each subset separately, calculate statistics to identify samples with high heterozigosity (e.g., due to sample contamination or population outliers) for sample exclusion:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.09 --filter phenotypes.txt EUR --mfilter 6 --het --out genotypes.10.EUR
+plink2 --bfile genotypes.09 --filter phenotypes.txt AFR --mfilter 6 --het --out genotypes.10.AFR
+```
+
+These calculations are NOT LD-sensitive and therefore is usually a good idea to perform some form of LD-based pruning before invoking them!
+
+```{r}
+genotypes.10.EUR.het = read.table("genotypes.10.EUR.het", header = TRUE, check.names = FALSE, as.is = TRUE)
+head(genotypes.10.EUR.het)
+```
+
+For each sample:
+
+- FID = Family ID
+- IID = Within-family/Individual ID
+- O(HOM) = Observed number of homozygotes
+- E(HOM) = Expected number of homozygotes
+- N(NM) = Number of non-missing autosomal genotypes
+- F = Method-of-moments F coefficient estimate
+
+Generate and inspect the F vs (sorted) samples plot to visually identify samples with high heterozigosity for sample exclusion:
+
+```{r}
+par(mfrow = c(1,2))
+
+genotypes.10.EUR.het = read.table("genotypes.10.EUR.het", header = TRUE, check.names = FALSE, as.is = TRUE)
+plot(genotypes.10.EUR.het %>% arrange(F) %$% F, xlab = "Samples", ylab = "F", main = "EUR")
+abline(h = 0, lty = 2)
+
+genotypes.10.AFR.het = read.table("genotypes.10.AFR.het", header = TRUE, check.names = FALSE, as.is = TRUE)
+plot(genotypes.10.AFR.het %>% arrange(F) %$% F, xlab = "Samples", ylab = "F", main = "AFR")
+abline(h = 0, lty = 2)
+
+par(mfrow = c(1,1))
+```
+
+The plots reveal a couple of samples with high heterozigosity. Use an F-value threshold for sample exclusion and merge the two subsets:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.09 --remove samples_to_exclude.txt --make-bed --out genotypes.11.EUR
+plink2 --bfile genotypes.09 --remove samples_to_exclude.txt --make-bed --out genotypes.11.AFR
+
+plink2 --bfile genotypes.11.EUR --bmerge genotypes.11.AFR --make-bed --out genotypes.11
+```
+
+
+### Exclude population outliers or samples with ancestry discordance
+
+Correct for population structure/stratification to avoid [confouding](https://en.wikipedia.org/wiki/Confounding) by population structure/stratification:
+
+- http://www.ncbi.nlm.nih.gov/pubmed/3177389
+
+- Stratify by self-reported ancestry (e.g., EUR vs AFR)
+    - Good for large diffs between populations
+    - Not so good for small diffs within populations
+- Use genome-wide genotypes to correct for population sub-structure
+    - [Principal components analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (PCA) is commonly used
+    - PCA summarizes the variability in a dataset where each principal component is an independent linear combinations of the input variables, with the first component explaining the most variability, the second component explaining the second most, and so on.
+    
+Inspect the (PC3 vs) PC2 vs PC1 plot to visually identify population structure/sub-structure and incorporate the main principal components in the regression model to correct for population structure/stratification!
+
+Unadjusted linear regression model:
+
+$$Y = \beta_G G + \epsilon$$
+
+Adjusted linear regression model:
+
+$$Y = \beta_G G + \beta_{PC1} PC1 + \beta_{PC2} PC2 + \beta_{PC3} PC3 + \epsilon$$
+
+Inspect the QQ-plot (observed vs expected P-values) of variant-trait associations to visually identify genomic inflation which is summarized by the genomic control lambda:
+
+$$\lambda_{GC} = median(\chi_{observed}^2)/median(\chi_{expected}^2) = median(\chi_{observed}^2)/0.4549364$$
+
+which should ideally be 1.00
+
+See also: http://www.nature.com/ejhg/journal/v19/n7/full/ejhg201139a.html
+
+#### Compare minor allele frequencies across different ancestry subsets/populations (e.g., EUR vs AFR)
+
+Split the dataset into EUR and AFR ancestry subsets and calculate the minor allele frequencies for each subset separately:
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.11 --filter phenotypes.txt EUR --mfilter 6 --freq --out genotypes.12.EUR
+plink2 --bfile genotypes.11 --filter phenotypes.txt AFR --mfilter 6 --freq --out genotypes.12.AFR
+```
+
+```{r}
+genotypes.12.EUR.frq = read.table("genotypes.12.EUR.frq", header = TRUE, check.names = FALSE, as.is = TRUE)
+head(genotypes.12.EUR.frq)
+```
+
+For each SNP:
+
+- CHR = Chromosome code
+- SNP = Variant identifier
+- A1 = Allele 1 (usually minor)
+- A2 = Allele 2 (usually major)
+- MAF = Allele 1 frequency
+- NCHROBS = Number of allele observations
+
+
+Generate and inspect the F vs (sorted) samples plot to visually identify samples with high heterozigosity for sample exclusion:
+
+```{r}
+genotypes.12.EUR.frq = read.table("genotypes.12.EUR.frq", header = TRUE, check.names = FALSE, as.is = TRUE)
+genotypes.12.AFR.frq = read.table("genotypes.12.AFR.frq", header = TRUE, check.names = FALSE, as.is = TRUE)
+
+genotypes.12.merged.frq = merge(genotypes.12.EUR.frq, genotypes.12.AFR.frq, by = "SNP", suffixes = c(".EUR",".AFR"))
+
+head(genotypes.12.merged.frq)
+```
+
+A1 is the minor allele and A2 is the major allele. However, what those alleles are depends on their frequencies in a specific ancestry subset/population and thus they can be swapped in different ancestry subsets/populations (e.g., EUR vs AFR)! Therefore, when comparing minor allele frequencies across ancestry subsets/populations, calculate MAF = 1-MAF for SNPs where the minor and major alleles are swapped, so that A1 and A2 refer to the same alleles across different ancestry subsets/populations.
+
+```{r}
+table(genotypes.12.merged.frq$A1.EUR != genotypes.12.merged.frq$A1.AFR)
+
+genotypes.12.merged_and_corrected.frq = genotypes.12.merged.frq %>%
+  sample_n(1000) %>%
+  rowwise() %>%
+  mutate(MAF.AFR = ifelse(A1.AFR != A1.EUR, 1-MAF.AFR, MAF.AFR)) %>%
+  select(SNP, CHR.EUR, A1.EUR, A2.EUR, MAF.EUR, MAF.AFR) %>%
+  rename(CHR = CHR.EUR, A1 = A1.EUR, A2 = A2.EUR)
+
+head(genotypes.12.merged_and_corrected.frq)
+```
+
+```{r}
+x = genotypes.12.merged_and_corrected.frq$MAF.EUR
+y = genotypes.12.merged_and_corrected.frq$MAF.AFR
+plot(x, y, xlab = "MAF (EUR)", ylab = "MAF (AFR)")
+abline(lm(y ~ x), col = "red")
+abline(a = 0, b = 1, col = "blue")
+```
+
+The plot reveal that, while weakly correlated, minor allele frequencies are, as expected, different in the EUR and AFR ancestry subsets.
+
+
+
+#### Correct for population structure/stratification using PCA
+
+Calculate PCs using [EIGENSOFT](https://github.com/DReichLab/EIG) or [SNPRelate](http://www.bioconductor.org/packages/release/bioc/vignettes/SNPRelate/inst/doc/SNPRelateTutorial.html) and include in the phenotype file as covariates.
+
+```{r}
+# EUR
+GBR = phenotypes$Population == "GBR"
+IBS = phenotypes$Population == "IBS"
+
+# AFR
+ACB = phenotypes$Population == "ACB"
+ASW = phenotypes$Population == "ASW"
+ESN = phenotypes$Population == "ESN"
+
+plot(phenotypes$PC1, phenotypes$PC2, xlab = "PC1", ylab = "PC2", type = "n")
+
+points(phenotypes$PC1[GBR], phenotypes$PC2[GBR], col = "black", pch = 5)
+points(phenotypes$PC1[IBS], phenotypes$PC2[IBS], col = "grey", pch = 6)
+points(phenotypes$PC1[ACB], phenotypes$PC2[ACB], col = "red", pch = 0)
+points(phenotypes$PC1[ASW], phenotypes$PC2[ASW], col = "blue", pch = 1)
+points(phenotypes$PC1[ESN], phenotypes$PC2[ESN], col = "green", pch = 2)
+```
+
+## Univariate association analysis
+
+Y1 in the phenotypes file is a continuous trait (e.g., weight, height, blood pressure, etc).
+
+```{r}
+boxplot(phenotypes$Y1 ~ phenotypes$Gender)
+```
+
+Linear regression is used to study the association between genotype and a continuos trait/phenotype (Y1):
+
+$$Y_1 = a + b_G Z(G) + b'X + \epsilon$$
+
+Z(G) is the coding of the genotype (A = major allele, B = minor allele):
+
+Model     Z(G=AA) Z(G=AB) Z(G=BB) PLINK
+--------- ------- ------- ------- ---------------
+Additive  0       1       2       --add (default)
+Dominant  0       1       1       --dominant
+Recessive 0       0       1       --recessive
+--------- ------- ------- ------- ---------------
+
+It is important to report whether the major or the minor allele is used as the effect allele (PLINK uses the minor allele as the effect allele)!
+
+
+### Unadjusted linear regression model
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.11 --pheno phenotypes.txt --pheno-name Y1 --linear --ci 0.95 --out genotypes.13
+```
+
+```{r}
+genotypes.13.assoc.linear = read.table("genotypes.13.assoc.linear", header = TRUE, as.is = TRUE)
+head(genotypes.13.assoc.linear)
+
+pvals.unadjusted = genotypes.13.assoc.linear %>% filter(!is.na(P)) %>% arrange(P) %$% P
+lambdagc.unadjusted = median(genotypes.13.assoc.linear$STAT^2, na.rm = TRUE)/qchisq(0.5, 1)
+qq(pvals.unadjusted, main = latex2exp(paste0("$\\lambda_{GC}$ = ", round(lambdagc.unadjusted, 4))))
+```
+
+
+```{r}
+manhattan(genotypes.13.assoc.linear, ylim = c(0, 12))
+
+genotypes.13.assoc.linear %>% filter(!is.na(P) & P <= 10e-6)
+```
+
+
+### Adjusted linear regression model
+
+```{r engine='sh', eval=FALSE}
+plink2 --bfile genotypes.11 --pheno phenotypes.txt --pheno-name Y1 --covar phenotypes.txt --covar-name Gender,PC1-PC3 --hide-covar --linear --ci 0.95 --out genotypes.14
+```
+
+```{r}
+genotypes.14.assoc.linear = read.table("genotypes.14.assoc.linear", header = TRUE, as.is = TRUE)
+head(genotypes.14.assoc.linear)
+
+pvals.adjusted = genotypes.14.assoc.linear %>% filter(!is.na(P)) %>% arrange(P) %$% P
+lambdagc.adjusted = median(genotypes.14.assoc.linear$STAT^2, na.rm = TRUE)/qchisq(0.5, 1)
+qq(pvals.adjusted, main = latex2exp(paste0("$\\lambda_{GC}$ = ", round(lambdagc.adjusted, 4))))
+```
+
+
+```{r}
+manhattan(genotypes.14.assoc.linear, ylim = c(0, 12))
+
+genotypes.14.assoc.linear %>% filter(!is.na(P) & P <= 10e-6)
+```
+
+[Logistic regression is used to study the association between genotype and a binary trait/phenotype (AFF/UNAFF)]
+
+
+Covariate adjustment is useful to eliminate confounding due to population structure. It can also increase power when adjusting for non-confounding variables (e.g., gender). But be careful, whether adjusting for a variable associated with Y1 makes sense depends on the study design, analysis type and the underlying causal model!
+
+- http://www.ncbi.nlm.nih.gov/pubmed/25640676
+- http://www.ncbi.nlm.nih.gov/pubmed/22820511
+- http://www.ncbi.nlm.nih.gov/pubmed/23162385
+- http://www.ncbi.nlm.nih.gov/pubmed/20025064
+
+
+## Genotype imputation
+
+The goal of imputation is to infer genotypes at untyped markers and it is necessary for cross-chip comparisons (e.g., Illumina and Affymetrix GWAS chips).
+
+Two widely used methods for imputation are:
+
+- MaCH/Minimac
+    - http://genome.sph.umich.edu/wiki/MaCH
+    - http://genome.sph.umich.edu/wiki/Minimac3
+    - http://genome.sph.umich.edu/wiki/Minimac3_Imputation_Cookbook
+- Impute/Impute2
+    - https://mathgen.stats.ox.ac.uk/impute/impute.html
+    - https://mathgen.stats.ox.ac.uk/impute/impute_v2.html
+    - http://genome.sph.umich.edu/wiki/IMPUTE2:_1000_Genomes_Imputation_Cookbook
+
+
+## GWAS meta-analysis
+
+Meta-analysis is necessary because individual studies are often underpowered and it is impractical to share sample-level data
+
+- http://www.ncbi.nlm.nih.gov/pubmed/24762786
+
+Fixed-effect meta-analysis is widely used for GWAS (the classical random-effect meta-analysis is not suitable for GWAS) but alternatives that are more powerful in the presence of effect heterogeneity are also available:
+
+- METASOFT
+    - http://genetics.cs.ucla.edu/meta/ 
+    - http://www.buhmhan.com/research
+    - http://zarlab.cs.ucla.edu/heterogeneity-and-meta-analysis/
+    - http://www.cell.com/ajhg/abstract/S0002-9297(14)00071-8
+    
+Meta-analysis is not difficult, but it is difficult to keep track of SNPs across studies due to the fact that often different studies use a different effect allele for the same SNP!
+
+- METAL - Meta-analysis Helper
+    - http://genome.sph.umich.edu/wiki/METAL
+
+## Multivariate association analysis - Geneset association tests
+
+- Aggregate univariate test statistics
+    - Sum the N largest chi-square associations statistics out of all SNPs that are located on/near genes that belong to a particular biological pathway (e.g., DNA repair genes for cancer)
+        - `plink --set-test`
+- Multivariate models
+    - Likelihood ratio statistic, Hotelling's T
+    - Kernel machine regression, e.g., [SKAT](http://www.hsph.harvard.edu/skat/)
+    - When testing the association between a trait and a single imputed SNP we are essentially testing the association between the trait and a weighted average of multiple genotyped SNPs, where the weights are determined by the imputation reference panel
+
+
+
+
+## Relevant papers
+
+# Test code  {.tabset .tabset-fade .tabset-pills}
+## md5check
+
+
+```{s}
+files=$1
+cd /sc/orga/projects/MMAAAS/ngs_res
+mkdir $1
+cd $1
+mkdir analysis_check
+
+echo "I made the directory"
+#gets into checksum directory
+cd /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-07-17/Sample_$1/analysis/checksum
+echo "got into checksum"
+
+
+echo "combined all the files"
+#must be in the directory with the fastq files
+cd ../
+
+echo "got into fastq"
+#searches the fastq files for the specific quality/integrety identifier and makes the 
+md5sum -c /sc/orga/projects/MMAAAS/ngs_res/$1/analysis_check/$1_test.md5 > /sc/orga/projects/MMAAAS/ngs_res/$1/analysis_check/$1_test.md5check
+
+
+#gets into checksum directory
+cd /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-07-17/Sample_$1/analysis/checksum
+echo "got into checksum"
+
+
+#combines all the md5 files into one so you don't have to search file by file
+cat *.md5 > /sc/orga/projects/MMAAAS/ngs_res/$1/analysis_check/$1_test.md5
+
+```
+
+## Make 
+
+```{s}
+./prepare_xml_Makefile.R 1102777134 /sc/orga/projects/MMAAAS/ngs_res/1102777134/results/1102777134.cohort.list /sc/orga/projects/MMAAAS/ngs_res/Pilot10/results/1102777134
+ 
+make all > stdout.log &
+
+/sc/orga/projects/MMAAAS/ngs_res/1102777134/results/1102777134.cohort.list
+```
+
+
+## scp -vr : how to get files from NYGC
+```{s}
+/sc/orga/projects/MMAAAS/ngs_res
+
+MMAAAS/ngs_res/AB38111476/data_check/AB38111476_test.md5check
+
+/sc/orga/projects/MMAAAS/ngs_res/AB35488265/data_check/AB35488265.md5
+
+fastq]$ md5sum -c /sc/orga/projects/MMAAAS/ngs_res/AB35488265/data_check/AB35488265.md5 > /sc/orga/projects/MMAAAS/ngs_res/AB35488265/data_check/AB35488265.md5check
+
+scp -vr gminer@scp.nygenome.org:data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/ /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-10-15_fastq/
+
+scp -vr gminer@scp.nygenome.org:data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB36487238/ /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB36487238
+
+scp -vr gminer@scp.nygenome.org:data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB33945628/ /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB33945628
+
+scp -vr gminer@scp.nygenome.org:data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB37418692/ /sc/orga/projects/MMAAAS/data/Project_MIN_10390_B01_GRM_WGS.2015-10-15/Sample_AB37418692
+
+```
+
+## How to archive data on Minerva to tape
+
+```{s}
+#save the entire data file
+
+ssh -X minerg01@minerva.hpc.mssm.edu
+
+dsmj -se=minerg01
+```
+
+## How to make a command, aka, set up an alias
+```{s}
+cd /Users/graceminer/src/dotfiles
+less .bashrc
+# in .bashrc file, add alias'
+# note must be a string following equal sign "" or ''
+alias minerva='ssh -X minerg01@minerva.hpc.mssm.edu'
+alias ll='ls -l'
+alias la='ls -a'
+```
+
+## How to copy file from personal computer to minerva
+```{s}
+ # Download file to computer
+ cd Downloads
+ # Copy the file from downloads file to minerva
+ scp rvtests-20160504-linux64-static.tar minerg01@minerva.hpc.mssm.edu:~/src/rvtests 
+```
+
+## How to keep logged into Minerva, stores login credentials
+
+```{s}
+mkdir ~/src/dotfiles/.ssh
+touch config
+nano config
+# Type the following into the config file
+Host *.hpc.mssm.edu
+ControlMaster auto
+ControlPersist yes
+ControlPath /tmp/%r@%h:%p.ssh.control_master.socket
+ForwardX11 yes
+
+config (END) 
+```
+
+## How to load all modules when minerva opens (sets environment)
+```{s}
+# make sure .bash_profile file exists
+# in home directory 
+less .bash_profile
+#if file exists, find or make .bashrc file
+less .bashrc
+touch .bashrc
+ ### In .bashrc file:
+ # .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+
+module load emacs
+module load R/3.3.0
+module load git
+module load plink/1.90
+```
+
+## How to download program from web
+```{s}
+cd ~home/src/rvtests/
+wget https://github.com/zhanxw/rvtests/releases/download/v1.9.9/rvtests-20160504-linux64-static.tar.gz
+
+## to untar
+tar -xvf rvtests-20160504-linux64-static.tar
+
+# set path to rvtest
+nano .bash_profile
+# add PATH to executable files
+PATH=$PATH:$HOME/bin:$HOME/src/rvtests/executable
+```
+
